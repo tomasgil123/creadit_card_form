@@ -1,19 +1,27 @@
 import React from 'react'
-import styled from 'styled-components'
 
-const Title = styled.h1`
-  color: red;
-`
+import MainButton from 'src/components/primitives/mainButton'
+import {
+  Container,
+  Title,
+  Subtitle,
+  WrapperSubmitSection,
+  ContainerSubmitButton,
+} from 'src/components/form/formComponents'
 
-type Props = {
-  name: string
+const Home: React.FunctionComponent = () => {
+  return (
+    <Container>
+      <Title>First step</Title>
+      <Subtitle>
+        This is the first step of the form. Keep going to find the simple credit card input
+      </Subtitle>
+      <WrapperSubmitSection />
+      <ContainerSubmitButton>
+        <MainButton text="Continue" onClickButton={undefined} typeButton="" secondary={false} />
+      </ContainerSubmitButton>
+    </Container>
+  )
 }
-
-const Home: React.FunctionComponent<Props> = ({ name }) => (
-  <div>
-    <p>Hello {name}!</p>
-    <Title>Title</Title>
-  </div>
-)
 
 export default Home
