@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { colors, space, boxShadow, breakpoints } from 'src/tokens'
+import { colors, space, breakpoints } from 'src/tokens'
 
 const HeaderWrapper = styled.div`
   position: 'relative';
@@ -9,7 +9,6 @@ const HeaderWrapper = styled.div`
   background-color: ${colors.base.white};
   z-index: 101;
   font-size: ${space.s4};
-  box-shadow: ${boxShadow.shadow};
 `
 
 const Container = styled.div`

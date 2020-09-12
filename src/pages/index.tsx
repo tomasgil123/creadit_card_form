@@ -1,4 +1,6 @@
 import React from 'react'
+import { useContext } from 'react'
+import { PageNavigationContext } from 'src/context'
 
 import MainButton from 'src/components/primitives/mainButton'
 import {
@@ -10,6 +12,7 @@ import {
 } from 'src/components/form/formComponents'
 
 const FirstStep: React.FunctionComponent = () => {
+  const { goToNextStep } = useContext(PageNavigationContext)
   return (
     <Container>
       <Title>First step</Title>
@@ -18,7 +21,7 @@ const FirstStep: React.FunctionComponent = () => {
       </Subtitle>
       <WrapperSubmitSection />
       <ContainerSubmitButton>
-        <MainButton text="Continue" onClickButton={undefined} typeButton="" secondary={false} />
+        <MainButton text="Continue" onClickButton={goToNextStep} typeButton="" secondary={false} />
       </ContainerSubmitButton>
     </Container>
   )
