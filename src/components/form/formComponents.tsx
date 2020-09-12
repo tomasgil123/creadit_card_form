@@ -7,6 +7,12 @@ const Container = styled.div`
   padding-top: ${space.s12};
   min-height: 90vh;
   margin-bottom: ${space.s32};
+  padding-left: ${space.s4};
+  padding-right: ${space.s4};
+  @media (min-width: ${breakpoints.md}) {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 `
 const Title = styled.h2`
   color: ${colors.text.primary};

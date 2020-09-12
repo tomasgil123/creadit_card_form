@@ -12,9 +12,10 @@ import {
 const FirstStep: React.FunctionComponent = () => {
   return (
     <Container>
-      <Title>First step</Title>
+      <Title>Second step</Title>
       <Subtitle>
-        This is the first step of the form. Keep going to find the simple credit card input
+        The purpose of this second step is just to tell to look how nice the progress bar looks.
+        Next step is the credit card input, I promise
       </Subtitle>
       <WrapperSubmitSection />
       <ContainerSubmitButton>
