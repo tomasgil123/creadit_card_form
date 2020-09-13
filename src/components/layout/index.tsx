@@ -3,33 +3,11 @@ import { PageNavigationContext } from 'src/context'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { stepsForm } from 'src/utils'
-import { colors } from 'src/tokens'
 import styled from 'styled-components'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import Header from 'src/components/header'
 
-type ProgressBarProps = {
-  width: number
-}
-
-const ProgressBar = styled.div`
-  width: ${(props: ProgressBarProps) => `${props.width}%`};
-  position: relative;
-  top: 0;
-  left: 0;
-  height: 4px;
-  background: ${colors.base.primaryGreen};
-  transition: width 0.5s;
-  &:after {
-    content: '';
-    width: 100vw;
-    height: 4px;
-    background: #dfe4e7;
-    position: absolute;
-    z-index: -1;
-  }
-`
 const Container = styled.div`
   overflow-x: hidden;
 `
@@ -46,8 +24,9 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
   useEffect(() => {
     const currentStepUrl = router.pathname
     const numberOfPages = stepsForm.length
-    const currentStep = stepsForm.find((step) => currentStepUrl.includes(step.url))
+    const currentStep = stepsForm.find((step) => currentStepUrl === step.path)
     setWidthProgressBar(((currentStep.stepNumber + 1) / numberOfPages) * 100)
+    console.log('widthProgressBar', widthProgressBar)
     setShowContent(true)
   }, [router.pathname])
 
@@ -64,8 +43,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
   }
   return (
     <Container>
-      <Header />
-      <ProgressBar width={widthProgressBar} />
+      <Header width={widthProgressBar} />
       <AnimatePresence>
         {showContent && (
           <motion.div
