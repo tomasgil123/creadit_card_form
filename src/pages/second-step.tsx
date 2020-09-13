@@ -1,32 +1,40 @@
 import React from 'react'
+import { useContext } from 'react'
+import { PageNavigationContext } from 'src/context'
 
 import MainButton from 'src/components/primitives/mainButton'
 import {
   Container,
-  ContainerFormStep,
+  ContainerTitleStepWithoutForm,
   Title,
   Subtitle,
   WrapperSubmitSection,
   ContainerSubmitButton,
 } from 'src/components/form/formComponents'
 
-const FirstStep: React.FunctionComponent = () => {
+const SecondStep: React.FunctionComponent = () => {
+  const { goToNextStep } = useContext(PageNavigationContext)
   return (
     <Container>
-      <ContainerFormStep>
+      <ContainerTitleStepWithoutForm>
         <Title>Second step</Title>
         <Subtitle>
           The purpose of this second step is just to tell to look how nice the progress bar looks.
           Next step is the credit card input, I promise
         </Subtitle>
-      </ContainerFormStep>
+      </ContainerTitleStepWithoutForm>
       <WrapperSubmitSection>
         <ContainerSubmitButton>
-          <MainButton text="Continue" onClickButton={undefined} typeButton="" secondary={false} />
+          <MainButton
+            text="Continue"
+            onClickButton={goToNextStep}
+            typeButton=""
+            secondary={false}
+          />
         </ContainerSubmitButton>
       </WrapperSubmitSection>
     </Container>
   )
 }
 
-export default FirstStep
+export default SecondStep

@@ -8,19 +8,22 @@ const Container = styled.div`
   height: 100vh;
 `
 
-const ContainerFormStep = styled.div`
+const ContainerTitle = styled.div`
   max-width: 500px;
   margin: auto;
   padding-top: ${space.s24};
   margin-bottom: ${space.s32};
   padding-left: ${space.s4};
   padding-right: ${space.s4};
-  flex-grow: 1;
   @media (min-width: ${breakpoints.md}) {
     padding-left: 0px;
     padding-right: 0px;
   }
 `
+const ContainerTitleStepWithoutForm = styled(ContainerTitle)`
+  flex-grow: 1;
+`
+
 const Title = styled.h2`
   color: ${colors.text.primary};
   font-weight: 600;
@@ -64,7 +67,8 @@ const ContainerSubmitButton = styled.div`
 
 export {
   Container,
-  ContainerFormStep,
+  ContainerTitle,
+  ContainerTitleStepWithoutForm,
   Title,
   Subtitle,
   WrapperSubmitSection,
