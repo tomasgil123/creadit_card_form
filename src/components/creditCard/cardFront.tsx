@@ -1,80 +1,115 @@
 import React from 'react'
-import * as Yup from 'yup'
+import { colors, space, boxShadow } from 'src/tokens'
+import { motion } from 'framer-motion'
+import styled from 'styled-components'
 
-import InputMask from 'react-input-mask'
-import { Formik } from 'formik'
-import MainButton from 'src/components/primitives/mainButton'
-import { WrapperSubmitSection, ContainerSubmitButton } from 'src/components/form/formComponents'
+const Container = styled.div`
+  padding: ${space.s3};
+  display: flex;
+  flex-direction: column;
+  height: 190px;
+  width: 300px;
+  border-radius: 15px;
+  background-color: #ffd675;
+  box-shadow: ${boxShadow.shadow};
+`
 
-//vamos a tener que guardar los datos en algun lado. Context?
-//cuando se hace click en siguiente aca queremos que se de vuelta la card
+const Row = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`
 
-const CardFront: React.FunctionComponent = () => {
+const CardNumber = styled.div`
+  font-size: ${space.s5};
+  color: ${colors.text.primary};
+`
+
+const CardNumberContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  padding-left: ${space.s3};
+`
+
+const CardOwnerName = styled.span`
+  font-size: ${space.s4};
+  color: ${colors.text.primary};
+  padding-left: ${space.s3};
+`
+const GoodThru = styled.span`
+  font-size: ${space.s4};
+  color: ${colors.text.primary};
+`
+
+const CardChip = styled.img`
+  height: ${space.s16};
+`
+const CardLogo = styled.img`
+  height: ${space.s8};
+`
+const showCardLogo = (cardNumber) => {
+  if (cardNumber[0] === '3') {
+    return <CardLogo src="/amex.png" alt="Card logo" />
+  }
+  if (cardNumber[0] === '4') {
+    return <CardLogo src="/visa.png" alt="Card logo" />
+  }
+  if (cardNumber[0] === '5') {
+    return <CardLogo src="/mastercard.png" alt="Card logo" />
+  }
+  if (cardNumber[0] === '6') {
+    return <CardLogo src="/discover.png" alt="Card logo" />
+  }
+  return null
+}
+
+type CardFrontProps = {
+  valueCurrentInput: string
+  valuesInputs: Record<string, unknown>
+  triggerFlip: boolean
+}
+
+const CardFront: React.FunctionComponent<CardFrontProps> = ({
+  valueCurrentInput,
+  valuesInputs,
+  triggerFlip,
+}) => {
+  const cardNumber = valueCurrentInput['cardNumber']
+    ? valueCurrentInput['cardNumber'].replace(/[^a-z\d\s]+/gi, '')
+    : valuesInputs['cardNumber']
+  const goodThru = valueCurrentInput['goodThru']
+    ? valueCurrentInput['goodThru']
+    : valuesInputs['goodThru']
+  const cardOwnerName = valueCurrentInput['cardOwnerName']
+    ? valueCurrentInput['cardOwnerName']
+    : valuesInputs['cardOwnerName']
+
   return (
-    <Formik
-      initialValues={{
-        cardNumber: '',
-        goodThru: '',
-        cardOwnerName: '',
-      }}
-      validationSchema={Yup.object().shape({
-        cardNumber: Yup.string()
-          .test(
-            'len',
-            'Intenta que el título no tenga mas de 75 caracteres',
-            (val) => !val || val.toString().length < 76
-          )
-          .required('Please, complete with your credit card number'),
-        goodThru: Yup.string().required(
-          'Please, complete with the good thru date of your credit card'
-        ),
-        cardOwnerName: Yup.string().required(
-          'Please, complete with name which appears in your credit card'
-        ),
-      })}
-      onSubmit={(values) => {
-        console.log('values', values)
-      }}
-    >
-      {(formProps) => (
-        <form onSubmit={formProps.handleSubmit}>
-          <div>{formProps.values.cardNumber}</div>
-          <InputMask
-            key="cardNumber"
-            name="cardNumber"
-            mask="9999 9999 9999 9999"
-            onChange={formProps.handleChange}
-            onBlur={formProps.handleBlur}
-            value={formProps.values.cardNumber}
-          />
-          <InputMask
-            key="goodThru"
-            name="goodThru"
-            mask="99/99"
-            onChange={formProps.handleChange}
-            onBlur={formProps.handleBlur}
-            value={formProps.values.goodThru}
-          />
-          <input
-            key="cardOwnerName"
-            name="cardOwnerName"
-            onChange={formProps.handleChange}
-            onBlur={formProps.handleBlur}
-            value={formProps.values.cardOwnerName}
-          />
-          <WrapperSubmitSection>
-            <ContainerSubmitButton>
-              <MainButton
-                text="Continue"
-                onClickButton={undefined}
-                typeButton="submit"
-                secondary={false}
-              />
-            </ContainerSubmitButton>
-          </WrapperSubmitSection>
-        </form>
-      )}
-    </Formik>
+    <>
+      <motion.div
+        initial={{ rotateY: 0 }}
+        animate={{ rotateY: triggerFlip ? -180 : 0 }}
+        transition={{ duration: 3 }}
+        style={{ backfaceVisibility: 'hidden', position: 'absolute' }}
+      >
+        <Container>
+          <Row>
+            <CardChip src="/card_chip.png" alt="card chip" />
+            {showCardLogo(cardNumber)}
+          </Row>
+          <CardNumberContainer>
+            <CardNumber>{cardNumber}</CardNumber>
+          </CardNumberContainer>
+          <Row>
+            <CardOwnerName>{cardOwnerName}</CardOwnerName>
+            <GoodThru>{goodThru}</GoodThru>
+          </Row>
+        </Container>
+      </motion.div>
+    </>
   )
 }
 

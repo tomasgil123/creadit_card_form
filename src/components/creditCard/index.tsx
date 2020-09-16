@@ -8,7 +8,7 @@ const listInputs = [
   { name: 'cardNumber', position: 0 },
   { name: 'goodThru', position: 1 },
   { name: 'cardOwnerName', position: 2 },
-  { name: 'cvd', position: 3 },
+  { name: 'cvv', position: 3 },
 ]
 
 type nextInputArg = {
@@ -22,7 +22,7 @@ const CreditCard: React.FunctionComponent = () => {
     cardNumber: '',
     goodThru: '',
     cardOwnerName: '',
-    cvd: '',
+    cvv: '',
   })
   const { goToNextStep } = useContext(PageNavigationContext)
 
@@ -36,7 +36,13 @@ const CreditCard: React.FunctionComponent = () => {
     const nextInput = listInputs.find((input) => input.position === currentInput.position + 1)
     setcurrentCardInput(nextInput.name)
   }
-  return <StepCardForm currentCardInput={currentCardInput} nextInput={nextInput} />
+  return (
+    <StepCardForm
+      currentCardInput={currentCardInput}
+      nextInput={nextInput}
+      valuesInputs={creditCardInfo}
+    />
+  )
 }
 
 export default CreditCard
