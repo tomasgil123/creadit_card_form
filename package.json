@@ -10,11 +10,14 @@
     "commit": "git-cz"
   },
   "dependencies": {
+    "formik": "^2.1.5",
     "framer-motion": "^2.6.13",
     "next": "9.5.3",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "styled-components": "^5.2.0"
+    "react-input-mask": "^2.0.4",
+    "styled-components": "^5.2.0",
+    "yup": "^0.29.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",

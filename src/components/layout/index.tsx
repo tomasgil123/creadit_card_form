@@ -26,13 +26,12 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
     const numberOfPages = stepsForm.length
     const currentStep = stepsForm.find((step) => currentStepUrl === step.path)
     setWidthProgressBar(((currentStep.stepNumber + 1) / numberOfPages) * 100)
-    console.log('widthProgressBar', widthProgressBar)
     setShowContent(true)
   }, [router.pathname])
 
   const goToNextStep = () => {
     const currentStepUrl = router.pathname
-    const currentStep = stepsForm.find((step) => currentStepUrl.includes(step.url))
+    const currentStep = stepsForm.find((step) => currentStepUrl === step.path)
     const nextStep = stepsForm.find((step) => step.stepNumber === currentStep.stepNumber + 1)
     setShowContent(false)
     setTimeout(function () {

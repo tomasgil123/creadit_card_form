@@ -1,18 +1,19 @@
 import styled from 'styled-components'
-import { space, colors, breakpoints } from 'src/tokens'
+import { space, colors, breakpoints, boxShadow } from 'src/tokens'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100vh;
+  align-items: center;
 `
 
 const ContainerTitle = styled.div`
   max-width: 500px;
-  margin: auto;
+  margin: 0 auto;
+  width: 100%;
   padding-top: ${space.s24};
-  margin-bottom: ${space.s32};
   padding-left: ${space.s4};
   padding-right: ${space.s4};
   @media (min-width: ${breakpoints.md}) {
@@ -65,6 +66,46 @@ const ContainerSubmitButton = styled.div`
   }
 `
 
+const LabelElement = styled.label`
+  font-size: ${space.s4};
+  font-weight: 500;
+  width: 100%;
+  display: block;
+  color: ${colors.text.primary};
+  margin-bottom: ${space.s2};
+`
+
+type InputElementProps = {
+  error: boolean
+}
+
+const InputElement = styled.div`
+  input {
+    width: 100%;
+    font-size: ${space.s4};
+    color: ${colors.text.primary};
+    border-width: 1px !important;
+    border: 0 solid
+      ${(props: InputElementProps) =>
+        props.error ? `${colors.text.error}` : `${colors.base.inputBorders}`};
+    outline: none !important;
+    border-radius: 4px;
+    height: ${space.s12};
+    box-shadow: ${boxShadow.shadow};
+    padding-left: ${space.s2};
+    &:focus {
+      outline: none !important;
+      border: 1px solid ${colors.base.primaryGreen};
+      box-shadow: 0 0 10px ${colors.base.secondaryBlue};
+    }
+  }
+`
+const ErrorMessageElement = styled.div`
+  padding-top: ${space.s3};
+  font-size: ${space.s4};
+  color: ${colors.text.error};
+`
+
 export {
   Container,
   ContainerTitle,
@@ -73,4 +114,7 @@ export {
   Subtitle,
   WrapperSubmitSection,
   ContainerSubmitButton,
+  LabelElement,
+  InputElement,
+  ErrorMessageElement,
 }
