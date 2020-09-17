@@ -7,18 +7,21 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   align-items: center;
+  padding-left: ${space.s3};
+  padding-right: ${space.s3};
 `
 
 const ContainerTitle = styled.div`
   max-width: 500px;
   margin: 0 auto;
   width: 100%;
-  padding-top: ${space.s24};
+  padding-top: ${space.s16};
   padding-left: ${space.s4};
   padding-right: ${space.s4};
   @media (min-width: ${breakpoints.md}) {
     padding-left: 0px;
     padding-right: 0px;
+    padding-top: ${space.s24};
   }
 `
 const ContainerTitleStepWithoutForm = styled(ContainerTitle)`
@@ -82,6 +85,7 @@ type InputElementProps = {
 const InputElement = styled.div`
   input {
     width: 100%;
+    text-transform: uppercase;
     font-size: ${space.s4};
     color: ${colors.text.primary};
     border-width: 1px !important;

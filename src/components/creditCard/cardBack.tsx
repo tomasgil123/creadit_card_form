@@ -1,17 +1,22 @@
 import * as React from 'react'
-import { colors, space, boxShadow } from 'src/tokens'
+import { colors, space, boxShadow, breakpoints } from 'src/tokens'
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  padding-top: ${space.s6};
+  padding-top: ${space.s4};
   display: flex;
   flex-direction: column;
-  height: 190px;
-  width: 300px;
+  height: 152px;
+  width: 240px;
   border-radius: 15px;
   background-color: #ffd675;
   box-shadow: ${boxShadow.shadow};
+  @media (min-width: ${breakpoints.md}) {
+    height: 190px;
+    width: 300px;
+    padding-top: ${space.s6};
+  }
 `
 
 const GrayStripe = styled.div`

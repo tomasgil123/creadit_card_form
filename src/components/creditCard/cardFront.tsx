@@ -1,5 +1,5 @@
 import React from 'react'
-import { colors, space, boxShadow } from 'src/tokens'
+import { colors, space, boxShadow, breakpoints } from 'src/tokens'
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
@@ -7,11 +7,15 @@ const Container = styled.div`
   padding: ${space.s3};
   display: flex;
   flex-direction: column;
-  height: 190px;
-  width: 300px;
+  height: 152px;
+  width: 240px;
   border-radius: 15px;
   background-color: #ffd675;
   box-shadow: ${boxShadow.shadow};
+  @media (min-width: ${breakpoints.md}) {
+    height: 190px;
+    width: 300px;
+  }
 `
 
 const Row = styled.div`
@@ -23,8 +27,11 @@ const Row = styled.div`
 `
 
 const CardNumber = styled.div`
-  font-size: ${space.s5};
+  font-size: ${space.s4};
   color: ${colors.text.primary};
+  @media (min-width: ${breakpoints.md}) {
+    font-size: ${space.s5};
+  }
 `
 
 const CardNumberContainer = styled.div`
@@ -35,20 +42,33 @@ const CardNumberContainer = styled.div`
 `
 
 const CardOwnerName = styled.span`
-  font-size: ${space.s4};
+  font-size: ${space.s3};
   color: ${colors.text.primary};
   padding-left: ${space.s3};
+  text-transform: uppercase;
+  @media (min-width: ${breakpoints.md}) {
+    font-size: ${space.s4};
+  }
 `
 const GoodThru = styled.span`
-  font-size: ${space.s4};
+  font-size: ${space.s3};
   color: ${colors.text.primary};
+  @media (min-width: ${breakpoints.md}) {
+    font-size: ${space.s3};
+  }
 `
 
 const CardChip = styled.img`
-  height: ${space.s16};
+  height: ${space.s12};
+  @media (min-width: ${breakpoints.md}) {
+    height: ${space.s8};
+  }
 `
 const CardLogo = styled.img`
-  height: ${space.s8};
+  height: ${space.s6};
+  @media (min-width: ${breakpoints.md}) {
+    height: ${space.s8};
+  }
 `
 const showCardLogo = (cardNumber) => {
   if (cardNumber[0] === '3') {

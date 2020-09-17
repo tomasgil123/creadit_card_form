@@ -48,7 +48,7 @@ const inputLabels = {
   cardNumber: 'Card number',
   goodThru: 'Good thru',
   cardOwnerName: 'Card owner name',
-  cvv: 'CVV number (three digit number on the back of your card)',
+  cvv: 'CVV number',
 }
 
 type CardFormProps = {

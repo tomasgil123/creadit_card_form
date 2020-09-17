@@ -9,7 +9,8 @@ const ContainerForm = styled.form`
 
 const ContainerCardAndInput = styled.div`
   flex-grow: 1;
-  width: 500px;
+  max-width: 500px;
+  width: 100%;
   margin: 0 auto;
 `
 
