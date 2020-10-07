@@ -79,7 +79,7 @@ const LabelElement = styled.label`
 `
 
 type InputElementProps = {
-  error: boolean
+  error: string
 }
 
 const InputElement = styled.div`

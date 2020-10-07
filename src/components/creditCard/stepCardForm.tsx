@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import * as Yup from 'yup'
 
 import CardInput from './cardInput'
-import { Formik } from 'formik'
 import MainButton from 'src/components/primitives/mainButton'
 import Card from './card'
 import { WrapperSubmitSection, ContainerSubmitButton } from 'src/components/form/formComponents'
@@ -57,54 +56,70 @@ type CardFormProps = {
   nextInput: (values) => void
 }
 
+//Formik wasnt working with react-input-mask
+//user has to complete 4 values which are completed secuencially and showing only one at a time
+
 const StepCardForm: React.FunctionComponent<CardFormProps> = ({
   currentCardInput,
   nextInput,
   valuesInputs,
 }) => {
+  const [valueInput, setValueInput] = useState({
+    cardNumber: '',
+    goodThru: '',
+    cardOwnerName: '',
+    cvv: '',
+  })
+  const [errorMessage, setErrorMessage] = useState(null)
+
+  const onChangeValueInput = (value) => {
+    const newValue = {}
+    newValue[currentCardInput] = value
+    setErrorMessage(null)
+    setValueInput({ ...valueInput, ...newValue })
+  }
+
+  const onHandleSubmit = async (e) => {
+    e.preventDefault()
+    const objectToValidate = {}
+    objectToValidate[currentCardInput] = valueInput[currentCardInput]
+
+    try {
+      await Yup.object(validationSchemas[currentCardInput]).validate(objectToValidate)
+      nextInput(valueInput)
+    } catch (err) {
+      setErrorMessage(err['errors'][0])
+    }
+  }
+
   return (
-    <Formik
-      initialValues={{
-        [currentCardInput]: '',
-      }}
-      validationSchema={Yup.object().shape(validationSchemas[currentCardInput])}
-      onSubmit={(values) => {
-        nextInput(values[currentCardInput])
-      }}
-    >
-      {({ errors, handleChange, handleBlur, handleSubmit, values, touched }) => (
-        <ContainerForm onSubmit={handleSubmit}>
-          <ContainerCardAndInput>
-            <Card
-              valuesInputs={valuesInputs}
-              valueCurrentInput={values}
-              nameCurrentInput={currentCardInput}
-            />
-            <CardInput
-              label={inputLabels[currentCardInput]}
-              key={currentCardInput}
-              name={currentCardInput}
-              mask={inputMasks[currentCardInput]}
-              errorMessage={errors[currentCardInput]}
-              touched={touched[currentCardInput]}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values[currentCardInput]}
-            />
-          </ContainerCardAndInput>
-          <WrapperSubmitSection>
-            <ContainerSubmitButton>
-              <MainButton
-                text="Continue"
-                onClickButton={undefined}
-                typeButton={'submit'}
-                secondary={false}
-              />
-            </ContainerSubmitButton>
-          </WrapperSubmitSection>
-        </ContainerForm>
-      )}
-    </Formik>
+    <ContainerForm onSubmit={(e) => onHandleSubmit(e)}>
+      <ContainerCardAndInput>
+        <Card
+          valuesInputs={valuesInputs}
+          valueCurrentInput={valueInput}
+          nameCurrentInput={currentCardInput}
+        />
+        <CardInput
+          label={inputLabels[currentCardInput]}
+          name={currentCardInput}
+          mask={inputMasks[currentCardInput]}
+          errorMessage={errorMessage}
+          onChange={onChangeValueInput}
+          value={valueInput[currentCardInput]}
+        />
+      </ContainerCardAndInput>
+      <WrapperSubmitSection>
+        <ContainerSubmitButton>
+          <MainButton
+            text="Continue"
+            onClickButton={undefined}
+            typeButton={'submit'}
+            secondary={false}
+          />
+        </ContainerSubmitButton>
+      </WrapperSubmitSection>
+    </ContainerForm>
   )
 }
 

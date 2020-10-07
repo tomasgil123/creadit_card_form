@@ -10,7 +10,6 @@
     "commit": "git-cz"
   },
   "dependencies": {
-    "formik": "^2.1.5",
     "framer-motion": "^2.6.13",
     "next": "9.5.3",
     "react": "16.13.1",

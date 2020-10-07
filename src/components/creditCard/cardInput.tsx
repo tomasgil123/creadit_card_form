@@ -5,28 +5,22 @@ import { LabelElement, InputElement, ErrorMessageElement } from 'src/components/
 
 type CardInputProps = {
   label: string
-  key: string
   name: string
   mask: string
   value: string
   errorMessage: string
-  touched: boolean
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-  onBlur: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const CardInput: React.FunctionComponent<CardInputProps> = ({
   label,
-  key,
   name,
   mask,
   value,
   errorMessage,
-  touched,
   onChange,
-  onBlur,
 }) => {
-  const showErrorMessage = errorMessage && touched
+  const showErrorMessage = errorMessage
   const errorMessageView = showErrorMessage ? (
     <ErrorMessageElement>{errorMessage}</ErrorMessageElement>
   ) : null
@@ -35,11 +29,9 @@ const CardInput: React.FunctionComponent<CardInputProps> = ({
       <LabelElement>{label}</LabelElement>
       <InputElement error={showErrorMessage}>
         <InputMask
-          key={key}
           name={name}
           mask={mask}
-          onChange={onChange}
-          onBlur={onBlur}
+          onChange={(e) => onChange(e.target.value)}
           value={value}
         />
       </InputElement>
