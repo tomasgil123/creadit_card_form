@@ -2,6 +2,7 @@ import React from 'react'
 import { colors, space, boxShadow, breakpoints } from 'src/tokens'
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
+import { CardInputs } from 'src/types/card'
 
 const Container = styled.div`
   padding: ${space.s3};
@@ -87,7 +88,7 @@ const showCardLogo = (cardNumber) => {
 }
 
 type CardFrontProps = {
-  valueCurrentInput: string
+  valueCurrentInput: CardInputs
   valuesInputs: Record<string, unknown>
   triggerFlip: boolean
 }

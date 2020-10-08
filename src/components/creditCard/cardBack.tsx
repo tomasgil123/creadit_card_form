@@ -2,6 +2,7 @@ import * as React from 'react'
 import { colors, space, boxShadow, breakpoints } from 'src/tokens'
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
+import { CardInputs } from 'src/types/card'
 
 const Container = styled.div`
   padding-top: ${space.s4};
@@ -34,7 +35,7 @@ const CVV = styled.span`
 `
 
 type CardBackProps = {
-  valueCurrentInput: string
+  valueCurrentInput: CardInputs
   valuesInputs: Record<string, unknown>
   triggerFlip: boolean
 }

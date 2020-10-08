@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { space, breakpoints } from 'src/tokens'
+import { CardInputs } from 'src/types/card'
 
 import CardFront from './cardFront'
 import CardBack from './cardBack'
@@ -21,7 +22,7 @@ const Container = styled.div`
 
 type CardProps = {
   nameCurrentInput: string
-  valueCurrentInput: string
+  valueCurrentInput: CardInputs
   valuesInputs: Record<string, unknown>
 }
 
