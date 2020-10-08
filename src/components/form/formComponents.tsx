@@ -7,8 +7,6 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   align-items: center;
-  padding-left: ${space.s3};
-  padding-right: ${space.s3};
 `
 
 const ContainerTitle = styled.div`
@@ -26,6 +24,8 @@ const ContainerTitle = styled.div`
 `
 const ContainerTitleStepWithoutForm = styled(ContainerTitle)`
   flex-grow: 1;
+  padding-left: ${space.s3};
+  padding-right: ${space.s3};
 `
 
 const Title = styled.h2`
