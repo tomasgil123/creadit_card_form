@@ -62,13 +62,13 @@ const GoodThru = styled.span`
 const CardChip = styled.img`
   height: ${space.s12};
   @media (min-width: ${breakpoints.md}) {
-    height: ${space.s8};
+    height: ${space.s16};
   }
 `
 const CardLogo = styled.img`
   height: ${space.s6};
   @media (min-width: ${breakpoints.md}) {
-    height: ${space.s8};
+    height: ${space.s16};
   }
 `
 const showCardLogo = (cardNumber) => {
