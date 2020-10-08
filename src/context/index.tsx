@@ -2,7 +2,8 @@
 import React, { createContext, useState } from 'react'
 
 const dispatch = {
-  saveFormInputs: () => {},
+  saveFormInputs: (inputValues: any) => {},
+  state: {},
 }
 
 export const CreditCardInfoContext = createContext(dispatch)
