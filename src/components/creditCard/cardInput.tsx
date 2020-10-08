@@ -23,7 +23,7 @@ const CardInput: React.FunctionComponent<CardInputProps> = ({
 }) => {
   const showErrorMessage = errorMessage
   const errorMessageView = showErrorMessage ? (
-    <ErrorMessageElement>{errorMessage}</ErrorMessageElement>
+    <ErrorMessageElement data-cy={`ErrorMessage`}>{errorMessage}</ErrorMessageElement>
   ) : null
   return (
     <>

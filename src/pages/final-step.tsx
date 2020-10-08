@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { useRouter } from 'next/router'
+import React, { useContext } from 'react'
 import { CreditCardInfoContext } from 'src/context'
 import { colors, space } from 'src/tokens'
 import styled from 'styled-components'
@@ -44,7 +43,9 @@ const FinalStep: React.FunctionComponent = () => {
         {Object.keys(state).map((pieceOfInformation) => (
           <RowCardInformartion key={pieceOfInformation}>
             <Label>{labels[pieceOfInformation]}</Label>
-            <Information>{state[pieceOfInformation]}</Information>
+            <Information data-cy={`Input-${pieceOfInformation}`}>
+              {state[pieceOfInformation]}
+            </Information>
           </RowCardInformartion>
         ))}
       </ContainerTitleStepWithoutForm>
