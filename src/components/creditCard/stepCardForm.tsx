@@ -86,7 +86,7 @@ const StepCardForm: React.FunctionComponent<CardFormProps> = ({
 
     try {
       await Yup.object(validationSchemas[currentCardInput]).validate(objectToValidate)
-      nextInput(valueInput)
+      nextInput(objectToValidate)
     } catch (err) {
       setErrorMessage(err['errors'][0])
     }

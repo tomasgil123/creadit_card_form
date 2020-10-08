@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-autofocus */
 import React from 'react'
 
 import InputMask from 'react-input-mask'
@@ -33,6 +34,7 @@ const CardInput: React.FunctionComponent<CardInputProps> = ({
           mask={mask}
           onChange={(e) => onChange(e.target.value)}
           value={value}
+          autoFocus
         />
       </InputElement>
       {errorMessageView}

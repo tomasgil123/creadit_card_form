@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useRouter } from 'next/router'
+import React, { useState, useContext } from 'react'
+import { CreditCardInfoContext, PageNavigationContext } from 'src/context'
 
 import StepCardForm from './stepCardForm'
 
@@ -15,7 +15,9 @@ type nextInputArg = {
 }
 
 const CreditCard: React.FunctionComponent = () => {
-  const router = useRouter()
+  const { saveFormInputs } = useContext(CreditCardInfoContext)
+  const { goToNextStep } = useContext(PageNavigationContext)
+
   //the first input we will ask user to complete is the card number
   const [currentCardInput, setcurrentCardInput] = useState('cardNumber')
   const [creditCardInfo, setCreditCardInfo] = useState({
@@ -26,17 +28,16 @@ const CreditCard: React.FunctionComponent = () => {
   })
 
   const nextInput = (value: nextInputArg) => {
-    setCreditCardInfo({ ...creditCardInfo, [currentCardInput]: value })
+    setCreditCardInfo({ ...creditCardInfo, ...value })
     const currentInput = listInputs.find((input) => currentCardInput === input.name)
     //is input last?
     if (currentInput.position + 1 === listInputs.length) {
-      router.push({
-        pathname: `/final-step`,
-        query: { ...creditCardInfo },
-      })
+      saveFormInputs({ ...creditCardInfo, ...value })
+      goToNextStep()
+    } else {
+      const nextInput = listInputs.find((input) => input.position === currentInput.position + 1)
+      setcurrentCardInput(nextInput.name)
     }
-    const nextInput = listInputs.find((input) => input.position === currentInput.position + 1)
-    setcurrentCardInput(nextInput.name)
   }
   return (
     <StepCardForm

@@ -1,5 +1,5 @@
 import React from 'react'
-import { PageNavigationContext } from 'src/context'
+import { PageNavigationContext, CreditCardProvider } from 'src/context'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { stepsForm } from 'src/utils'
@@ -41,24 +41,26 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
     }, 500)
   }
   return (
-    <Container>
-      <Header width={widthProgressBar} />
-      <AnimatePresence>
-        {showContent && (
-          <motion.div
-            key={router.pathname}
-            initial={{ x: 300, opacity: 0 }}
-            exit={{ x: -300, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <PageNavigationContext.Provider value={{ goToNextStep }}>
-              {children}
-            </PageNavigationContext.Provider>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </Container>
+    <CreditCardProvider>
+      <Container>
+        <Header width={widthProgressBar} />
+        <AnimatePresence>
+          {showContent && (
+            <motion.div
+              key={router.pathname}
+              initial={{ x: 300, opacity: 0 }}
+              exit={{ x: -300, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <PageNavigationContext.Provider value={{ goToNextStep }}>
+                {children}
+              </PageNavigationContext.Provider>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </Container>
+    </CreditCardProvider>
   )
 }
 

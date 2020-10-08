@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
+import { CreditCardInfoContext } from 'src/context'
 import { colors, space } from 'src/tokens'
 import styled from 'styled-components'
 
@@ -33,30 +34,19 @@ const labels = {
 }
 
 const FinalStep: React.FunctionComponent = () => {
-  const [cardInformation, setCardInformation] = useState(null)
-  const router = useRouter()
-
-  useEffect(() => {
-    if (router && router.query) {
-      setCardInformation(router.query)
-    }
-  }, [])
+  const { state } = useContext(CreditCardInfoContext)
 
   return (
     <Container>
       <ContainerTitleStepWithoutForm>
         <Title>Final step</Title>
         <Subtitle>Info completed by the user in the previous step</Subtitle>
-        {cardInformation && (
-          <>
-            {Object.keys(cardInformation).map((pieceOfInformation) => (
-              <RowCardInformartion key={pieceOfInformation}>
-                <Label>{labels[pieceOfInformation]}</Label>
-                <Information>{cardInformation[pieceOfInformation]}</Information>
-              </RowCardInformartion>
-            ))}
-          </>
-        )}
+        {Object.keys(state).map((pieceOfInformation) => (
+          <RowCardInformartion key={pieceOfInformation}>
+            <Label>{labels[pieceOfInformation]}</Label>
+            <Information>{state[pieceOfInformation]}</Information>
+          </RowCardInformartion>
+        ))}
       </ContainerTitleStepWithoutForm>
     </Container>
   )
