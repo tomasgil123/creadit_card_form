@@ -28,7 +28,7 @@ const SecondStep: React.FunctionComponent = () => {
           <MainButton
             text="Continue"
             onClickButton={goToNextStep}
-            typeButton=""
+            typeButton="button"
             secondary={false}
           />
         </ContainerSubmitButton>

@@ -48,9 +48,15 @@ const MainButton: React.FunctionComponent<MainButtonProps> = ({
 }) => {
   return (
     <>
-      <ContainerButton secondary={secondary} type={typeButton} onClick={onClickButton}>
-        {text}
-      </ContainerButton>
+      {typeButton === 'submit' ? (
+        <ContainerButton secondary={secondary} type="submit" onClick={onClickButton}>
+          {text}
+        </ContainerButton>
+      ) : (
+        <ContainerButton secondary={secondary} type="button" onClick={onClickButton}>
+          {text}
+        </ContainerButton>
+      )}
     </>
   )
 }
