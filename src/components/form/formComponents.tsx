@@ -47,6 +47,8 @@ const WrapperSubmitSection = styled.div`
   align-items: center;
   z-index: 9;
   border-top: 1px solid ${colors.base.borders};
+  position: fixed;
+  bottom: 0px;
 `
 const ContainerSubmitButton = styled.div`
   padding-top: ${space.s4};
