@@ -16,6 +16,15 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 Credit card form is form with four steps. One of those steps requests credit card info.
 
+### Tests
+
+Tests were made with Cypress.
+To run the tests:
+```bash
+yarn cypress
+```
+
+
 ## Deploy on Vercel
 
 https://creadit-card-form.vercel.app/
