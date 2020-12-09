@@ -29,6 +29,7 @@ const FirstStep: React.FunctionComponent = () => {
             onClickButton={goToNextStep}
             typeButton="button"
             secondary={false}
+            data-cy={`ButtonFirstStep`}
           />
         </ContainerSubmitButton>
       </WrapperSubmitSection>
